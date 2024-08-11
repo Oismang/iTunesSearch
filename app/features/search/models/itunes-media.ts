@@ -29,6 +29,6 @@ export class ItunesMedia implements ItunesMediaModel {
     this.imageUrl = artworkUrl100 && typeof artworkUrl100 === "string" ? artworkUrl100 : "";
     this.releaseDate = typeof releaseDate === "string" ? releaseDate : "";
 
-    this.mediaId = getUuidByString(this.name + this.type + this.author + this.releaseDate);
+    this.mediaId = getUuidByString(this.name + this.type + this.author + this.releaseDate + this.imageUrl);
   }
 }

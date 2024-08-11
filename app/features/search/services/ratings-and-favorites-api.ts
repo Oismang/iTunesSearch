@@ -1,10 +1,9 @@
 import { dbConnect } from "@/app/db/lib/mongodb";
+import RatingsAndFavoritesModel from "@/app/db/models/ratings-and-favorites";
 import {
   IRatingsAndFavoritesModel,
   RatingsAndFavorites,
 } from "../models/ratings-and-favorites";
-import RatingsAndFavoritesModel from "@/app/db/models/ratings-and-favorites";
-import { unstable_cache } from "next/cache";
 
 export interface IRatingAndFavotiresDTO {
   id: string;

@@ -25,9 +25,10 @@ export function SearchPagination({
   }
 
   return (
-    <Pagination count={pages}
+    <Pagination
+      count={pages}
       sx={{ display: "flex", justifyContent: "center", mt: 4 }}
-      defaultPage={parseInt(searchParams.get('page')?.toString() || "1")}
+      page={parseInt(searchParams.get('page')?.toString() || "1")}
       onChange={handleOnChange}
     />
   )

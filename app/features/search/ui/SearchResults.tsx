@@ -5,18 +5,18 @@ import { SearchList } from "./SearchList";
 import { SearchPagination } from "./SearchPagination";
 
 export async function SearchResults({
-  query,
-  mediatype,
-  page
+  searchParams: { query, mediatype, page, rating, favorite }
 }: {
-  query: string;
-  mediatype: string;
-  page: number;
+  searchParams: {
+    query: string;
+    mediatype: string;
+    page: number;
+    rating: string[] | null;
+    favorite: boolean;
+  }
 }) {
   const [ratingsAndFavorites, itunesMedia] = await Promise.all([getRatingsAndFavorites(), getItunesMedia(query, mediatype)]);
-  const pages = Math.floor(itunesMedia.length / 10);
-  const currentMedia = itunesMedia
-    .slice((page - 1) * 10, (page - 1) * 10 + 10)
+  const searchItems = itunesMedia
     .map((media) => {
       if (ratingsAndFavorites[media.mediaId]) {
         return {
@@ -27,9 +27,21 @@ export async function SearchResults({
       return media;
     }) as ISearchItem[];
 
+  let filteredItems: ISearchItem[] = searchItems;
+
+  if (rating) {
+    filteredItems = filteredItems.filter((item) => rating.includes(item.rating ? item.rating.toString() : "0"));
+  }
+  if (favorite) {
+    filteredItems = filteredItems.filter((item) => item.favorite);
+  }
+
+  const pages = Math.ceil(filteredItems.length / 10);
+  const currentSearchItems = filteredItems.slice((page - 1) * 10, (page - 1) * 10 + 10);
+
   return (
     <>
-      <SearchList itunesMedia={currentMedia}></SearchList>
+      <SearchList searchItems={currentSearchItems}></SearchList>
       {!!pages && <SearchPagination pages={pages}></SearchPagination>}
     </>
   )
