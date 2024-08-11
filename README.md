@@ -14,7 +14,7 @@ Link to deployed app: https://itunes-search-eta.vercel.app/
 
 MongoDB is used here to store data about ratings and favourites for each search item.
 
-#### How to run
+### How to run
 
 To set up the project, you need to provide a link to your MongoDB URL via the `MONGODB_URI` variable in the `.env` file.
 Then you can run the project using the following commands:
