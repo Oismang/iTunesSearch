@@ -2,7 +2,7 @@
 
 Link to deployed app: https://itunes-search-eta.vercel.app/
 
-#### Functionality
+### Functionality
 - Search using the iTunes Search API
 - Each search item includes name, author, type, image, and release date information
 - Rating and Like button on every search item
